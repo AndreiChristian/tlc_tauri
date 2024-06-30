@@ -9,6 +9,7 @@ import Locations from "./routes/Locations";
 import Issues from "./routes/Issues";
 import Auth from "./routes/Auth";
 import Staff from "./routes/Staff";
+import Inventory from "./routes/Inventory";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/staff",
         element: <Staff />
+      },
+      {
+        path: "/inventory",
+        element: <Inventory />
       }
     ]
   }

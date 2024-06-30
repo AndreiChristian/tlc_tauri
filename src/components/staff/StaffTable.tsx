@@ -11,8 +11,9 @@ import {
 } from "@/components/ui/table"
 import { Staff } from "@/pb/types";
 import { EllipsisIcon } from "lucide-react";
+import StaffTableRow from "./StaffTableRow";
 
-export default function StaffTable({ records }: { records: Staff[] }) {
+export default function StaffTable({ records, refetch }: { records: Staff[], refetch: () => void }) {
   return (
     <Card>
       <Table>
@@ -22,19 +23,13 @@ export default function StaffTable({ records }: { records: Staff[] }) {
             <TableHead>Nume</TableHead>
             <TableHead>Prenume</TableHead>
             <TableHead>Rol</TableHead>
+            <TableHead>Activ</TableHead>
             <TableHead className="">Actiuni</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {records.map(r => (
-            <TableRow key={r.id} >
-              <TableCell className="font-medium">{r.id}</TableCell>
-              <TableCell>{r.familyName}</TableCell>
-              <TableCell>{r.name}</TableCell>
-              <TableCell>{r.role}</TableCell>
-              <TableCell className="text-right"><EllipsisIcon /></TableCell>
-            </TableRow>
-          ))}
+          {records.map(r => <StaffTableRow r={r} key={r.id} refetch={refetch} />
+          )}
         </TableBody>
       </Table>
     </Card>

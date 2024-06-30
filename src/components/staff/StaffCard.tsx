@@ -9,7 +9,7 @@ interface Props {
 
 export default function StaffCard({ staffNumber, staffTotalNumber, title }: Props) {
   return (
-    <Card className="w-[300px]" >
+    <Card className="w-full" >
       <CardHeader className="pb-2">
         <CardDescription>{title}</CardDescription>
         <CardTitle className="text-4xl">{staffNumber}</CardTitle>

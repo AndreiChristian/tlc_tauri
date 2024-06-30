@@ -1,4 +1,4 @@
-import { BadgeAlert, Home, MapPin, Package2, Settings, TargetIcon, User } from "lucide-react";
+import { BadgeAlert, Beef, Home, MapPin, Package2, Settings, TargetIcon, User } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { ModeToggle } from "../theme/theme-toggle";
 import { ReactNode } from "react";
@@ -20,14 +20,17 @@ export default function Sidenav() {
         <SideNavLink to="/locations" name="locations" >
           <MapPin className="h-5 w-5" />
         </SideNavLink>
-        <SideNavLink to="/issues" name="Issues" >
-          <BadgeAlert className="h-5 w-5" />
-        </SideNavLink>
         <SideNavLink to="/staff" name="Staff" >
           <User className="h-5 w-5" />
         </SideNavLink>
         <SideNavLink to="/settings" name="Settings" >
           <Settings className="h-5 w-5" />
+        </SideNavLink>
+        <SideNavLink to="/inventory" name="Inventory" >
+          <Beef className="h-5 w-5" />
+        </SideNavLink>
+        <SideNavLink to="/issues" name="Issues" >
+          <BadgeAlert className="h-5 w-5" />
         </SideNavLink>
         <ModeToggle />
       </nav>

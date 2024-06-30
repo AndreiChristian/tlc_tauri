@@ -4,13 +4,19 @@ import StaffCard from "@/components/staff/StaffCard"
 import StaffTable from "@/components/staff/StaffTable"
 import Title from "@/components/Title"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Progress } from "@/components/ui/progress"
 import { useGetFullList } from "@/pb/hooks/useGetFullList"
 import { Staff as StaffInterface } from "@/pb/types"
 import { Redo2 } from "lucide-react"
 import { useState } from "react"
+import { AlertCircle } from "lucide-react"
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+import { pb } from "@/pb/main"
+
 
 export default function Staff() {
 
@@ -28,7 +34,17 @@ export default function Staff() {
 
   if (error) {
     console.log(error)
-    return <div className="text-foreground" >error</div>
+    return (
+      <PageWrapper>
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Eroare: {error.name}</AlertTitle>
+          <AlertDescription>
+            {error.message}
+          </AlertDescription>
+        </Alert>
+      </PageWrapper>
+    )
   }
 
   const staffTotalNumber = records.length
@@ -39,9 +55,10 @@ export default function Staff() {
 
   return (
     <PageWrapper>
-      <Title title="Staff" />
+      <Title title="Personal" />
       <div className="h-5" />
       <div className="flex items-center justify-start w-full gap-5" >
+        <StaffCard title="Total" staffTotalNumber={staffTotalNumber} staffNumber={staffTotalNumber} />
         <StaffCard title="Bucatarie" staffTotalNumber={staffTotalNumber} staffNumber={kitchenNumber} />
         <StaffCard title="Livrare" staffTotalNumber={staffTotalNumber} staffNumber={deliveryNumber} />
         <StaffCard title="Impachetare" staffTotalNumber={staffTotalNumber} staffNumber={packagingNumber} />
@@ -57,7 +74,7 @@ export default function Staff() {
           Reincarca</Button>
       </div>
       <div className="h-5" ></div>
-      <StaffTable records={records.filter(r => !searchValue || r.familyName.includes(searchValue) || r.name.includes(searchValue))} />
+      <StaffTable refetch={refetch} records={records.filter(r => !searchValue || r.familyName.toUpperCase().includes(searchValue.toUpperCase()) || r.name.toUpperCase().includes(searchValue.toUpperCase()))} />
     </PageWrapper>
   )
 }

@@ -11,8 +11,16 @@ export interface Issue extends RecordModel {
 export interface Staff extends RecordModel {
   name: string,
   familyName: string,
-  role: "bucatarie" | "impachetare" | "livrare" | "altele"
+  role: "bucatarie" | "impachetare" | "livrare" | "altele",
+  active: boolean
 }
+
+export interface InventoryRecord extends RecordModel {
+  scriptic: number,
+  faptic: number,
+  name: string,
+}
+
 
 export interface TypedPocketbase extends PocketBase {
   collection(idOrName: string): RecordService // default fallback for any other collection
