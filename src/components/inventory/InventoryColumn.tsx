@@ -10,31 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Checkbox } from "../ui/checkbox"
 
 export const columns: ColumnDef<InventoryRecord>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
   {
     accessorKey: "id",
     header: "Id"
@@ -55,7 +32,6 @@ export const columns: ColumnDef<InventoryRecord>[] = [
     header: "Actiuni",
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
 
       return (
         <DropdownMenu>
@@ -66,11 +42,11 @@ export const columns: ColumnDef<InventoryRecord>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>Actiuni</DropdownMenuLabel>
+            <DropdownMenuSeparator />
             <DropdownMenuItem>
               Copy payment ID
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>

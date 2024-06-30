@@ -10,6 +10,8 @@ import Issues from "./routes/Issues";
 import Auth from "./routes/Auth";
 import Staff from "./routes/Staff";
 import Inventory from "./routes/Inventory";
+import CalendarRoute from "./routes/Calendar";
+import Orders from "./routes/Orders";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
       {
         path: "/inventory",
         element: <Inventory />
+      },
+      {
+        path: "/calendar",
+        element: <CalendarRoute />
+      },
+      {
+        path: "/orders",
+        element: <Orders />
       }
     ]
   }
