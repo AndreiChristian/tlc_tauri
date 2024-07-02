@@ -12,6 +12,8 @@ import Staff from "./routes/Staff";
 import Inventory from "./routes/Inventory";
 import CalendarRoute from "./routes/Calendar";
 import Orders from "./routes/Orders";
+import Reciepes from "./routes/Reciepes";
+import Alergies from "./routes/Alergies";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         element: <Orders />
+      },
+      {
+        path: "/reciepes",
+        element: <Reciepes />
+      },
+      {
+        path: "/alergies",
+        element: <Alergies />
       }
     ]
   }

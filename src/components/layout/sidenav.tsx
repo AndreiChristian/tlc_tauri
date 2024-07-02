@@ -1,4 +1,4 @@
-import { BadgeAlert, Beef, Calendar, Home, ListOrdered, MapPin, Package2, Settings, TargetIcon, User } from "lucide-react";
+import { BadgeAlert, BeanOff, Beef, Calendar, CookingPot, Home, ListOrdered, MapPin, Package2, Settings, TargetIcon, User } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { ModeToggle } from "../theme/theme-toggle";
 import { ReactNode } from "react";
@@ -31,6 +31,12 @@ export default function Sidenav() {
         </SideNavLink>
         <SideNavLink to="/calendar" name="Calendar" >
           <Calendar className="h-5 w-5" />
+        </SideNavLink>
+        <SideNavLink to="/alergies" name="Alergii" >
+          <BeanOff className="h-5 w-5" />
+        </SideNavLink>
+        <SideNavLink to="/reciepes" name="Retete" >
+          <CookingPot className="h-5 w-5" />
         </SideNavLink>
         <SideNavLink to="/issues" name="Probleme" >
           <BadgeAlert className="h-5 w-5" />

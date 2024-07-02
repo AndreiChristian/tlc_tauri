@@ -56,22 +56,20 @@ export default function CalendarRoute() {
     <PageWrapper>
       <Title title="Calendar" />
       <div className="h-5" />
-      <div className="flex flex-wrap items-start justify-start gap-5" >
-        <Calendar
-          locale={ro}
-          showOutsideDays={false}
-          disabled={beforeMatcher}
-          numberOfMonths={12}
-          mode="single"
-          selected={date}
-          onSelect={(date) => handleSelectDate(date)}
-          className="rounded-md border"
-          classNames={{
-            months: "flex flex-wrap justify-start gap-10",
-            month: "w-full sm:w-auto border rounded-md ",
-          }}
-        />
-      </div>
+      <Calendar
+        locale={ro}
+        showOutsideDays={false}
+        disabled={beforeMatcher}
+        numberOfMonths={12}
+        mode="single"
+        selected={date}
+        onSelect={(date) => handleSelectDate(date)}
+        className="rounded-md border"
+        classNames={{
+          months: "grid grid-cols-4 gap-10",
+          month: "sm:w-auto border rounded-md mx-auto p-2",
+        }}
+      />
       <div className="h-5" />
       {record ?
         <CalendarRecordCard record={record} setRecord={setRecord} />
