@@ -1,55 +1,64 @@
 import PageWrapper from "@/components/layout/PageWrapper";
+import { LocationsDataTable } from "@/components/locations/LocationsTable";
+import { locationsColumns } from "@/components/locations/LocationTableColumns";
+import ErrorElement from "@/components/shared/ErrorElement";
+import Spacer from "@/components/shared/Spacer";
 import Title from "@/components/Title";
-import { Card } from "@/components/ui/card";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { pb } from "@/pb/main";
-import { RecordModel } from "pocketbase";
-import { useEffect, useState } from "react";
+import { useGetFullList } from "@/pb/hooks/useGetFullList";
+import { LocationRecord } from "@/pb/types";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import { Input } from "@/components/ui/input";
+
 
 export default function Locations() {
 
-  const [records, setRecords] = useState<RecordModel[]>([])
+  const { records, loading, error, refetch } = useGetFullList<LocationRecord>("locations")
 
-  async function fetchData() {
-    try {
-      const data = await pb.collection('food').getFullList({
-        sort: '-created',
-      });
-      setRecords(data)
-    } catch (error) {
-      console.error(error)
-    }
+  if (loading) {
+    return <div>Loading</div>
   }
 
-  useEffect(() => {
-    fetchData()
-  }, [])
+  if (error) {
+    return <PageWrapper>
+      <ErrorElement error={error} />
+    </PageWrapper>
+  }
 
   return <PageWrapper>
     <Title title="Locatii" />
-    <div className="h-10" ></div>
-    <Card>
-      <Table >
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Numar</TableHead>
-            <TableHead>Nume</TableHead>
-            <TableHead>Numar Portii</TableHead>
-            <TableHead className="text-right">Ora de plecare</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {records.map((r, index) => (
-            <TableRow key={r.id}>
-              <TableCell className="font-medium">{index + 1}</TableCell>
-              <TableCell>{r.name}</TableCell>
-              <TableCell>550</TableCell>
-              <TableCell className="text-right">9:00</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Card>
+    <Spacer />
+    <LocationsDataTable
+      data={records}
+      columns={locationsColumns}
+      refetch={refetch}
+      addElement={<AddElement />}
+    />
   </PageWrapper>
+}
+
+function AddElement() {
+  return (
+    <Sheet>
+      <SheetTrigger>
+        <Button>
+          <Plus className="mr-2 w-4 h-4" />
+          Adauga</Button>
+      </SheetTrigger>
+      <SheetContent side="right">
+        <SheetHeader>
+          <SheetTitle>Adauga un element nou</SheetTitle>
+          <Input placeholder="Hello" />
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  )
 }

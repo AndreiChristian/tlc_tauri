@@ -6,13 +6,13 @@ import {
   AlertTitle,
 } from "@/components/ui/alert"
 
-export default function ErrorElement({ message }: { message: string }) {
+export default function ErrorElement({ error }: { error: Error }) {
   return (
     <Alert variant="destructive">
       <AlertCircle className="h-4 w-4" />
-      <AlertTitle>Error</AlertTitle>
+      <AlertTitle>{error.name}</AlertTitle>
       <AlertDescription>
-        {message}
+        {error.message}
       </AlertDescription>
     </Alert>
   )

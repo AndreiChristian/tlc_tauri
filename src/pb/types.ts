@@ -22,6 +22,13 @@ export interface Reciepe {
 
 export interface ReciepeRecord extends Reciepe, RecordModel { }
 
+export interface Location {
+  name: string,
+  portions: number
+}
+
+export interface LocationRecord extends Location, RecordModel { }
+
 export interface InventoryRecord extends RecordModel {
   scriptic: number,
   faptic: number,

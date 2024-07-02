@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { pb } from '../main'; // Adjust this import path as needed
-import { RecordModel } from 'pocketbase';
+import { pb } from '../main';
 
 export function useGetFullList<T>(collectionName: string) {
   const [records, setRecords] = useState<T[]>([]);
