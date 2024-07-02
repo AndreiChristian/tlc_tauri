@@ -6,11 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Redo2 } from "lucide-react";
 import { useGetFullList } from "@/pb/hooks/useGetFullList";
 import IssuesTable from "@/components/issues/IssuesTable";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default function Issues() {
 
-  const { records, loading, error, refetch } = useGetFullList("issues")
+  const { records, loading, error, refetch } = useGetFullList<any>("issues")
 
   if (loading) {
     return <div>Loading ...</div>

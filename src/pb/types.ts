@@ -15,6 +15,13 @@ export interface Staff extends RecordModel {
   active: boolean
 }
 
+export interface Reciepe {
+  title: string,
+  description: string
+}
+
+export interface ReciepeRecord extends Reciepe, RecordModel { }
+
 export interface InventoryRecord extends RecordModel {
   scriptic: number,
   faptic: number,
