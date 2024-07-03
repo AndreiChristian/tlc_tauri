@@ -1,6 +1,7 @@
-import { LocationRecord } from "@/pb/types"
-import { ColumnDef } from "@tanstack/react-table"
+import { LocationRecord } from "@/pb/types";
+import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -32,12 +33,12 @@ export const locationsColumns: ColumnDef<LocationRecord>[] = [
   },
   {
     accessorKey: "portions",
-    header: "Portii",
+    header: "portii",
   },
   {
     id: "actions",
     header: "Actiuni",
-    cell: ({ }) => {
+    cell: ({ row }) => {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

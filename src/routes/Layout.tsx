@@ -4,8 +4,17 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { pb } from "@/pb/main";
 import { Navigate, Outlet, redirect } from "react-router-dom";
+import "../index.css"
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Layout() {
+
+  const [theme, setTheme] = useState("orange")
+
+  useEffect(() => {
+    // import(`../themes/${theme}.css`)
+  }, [theme])
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme-tauri" >

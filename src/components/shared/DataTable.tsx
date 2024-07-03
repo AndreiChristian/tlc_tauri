@@ -33,6 +33,10 @@ interface DataTableProps<TData, TValue> {
   refetch: () => void
   addElement?: ReactNode,
   enablePagination?: boolean
+  pageSize?: number
+  enableFiltering?: boolean
+  columnFiltering?: string,
+  enableColumnHiding?: boolean
 }
 
 
@@ -41,12 +45,16 @@ export function SharedDataTable<TData, TValue>({
   data,
   refetch,
   addElement,
-  enablePagination = true
+  enablePagination = true,
+  enableFiltering = true,
+  pageSize = 10,
+  columnFiltering = "id",
+  enableColumnHiding = true
 }: DataTableProps<TData, TValue>) {
 
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 10,
+    pageSize,
   })
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
@@ -77,14 +85,16 @@ export function SharedDataTable<TData, TValue>({
   return (
     <div>
       <div className="flex items-center pb-5 gap-5">
-        <FilteringInput table={table} />
+        {enableFiltering && <FilteringInput table={table} columnName={columnFiltering} />}
         <span className="flex-1" ></span>
         {addElement}
         <Button onClick={refetch} >
           <Redo2 className="mr-2 w-4 h-4" />
           Reincarca
         </Button>
-        <ColumnDropwDown table={table} />
+        {
+          enableColumnHiding && <ColumnDropwDown table={table} />
+        }
       </div>
       <div className="rounded-md border">
         <div>
@@ -137,13 +147,13 @@ export function SharedDataTable<TData, TValue>({
   )
 }
 
-function FilteringInput<T>({ table }: { table: TableInterface<T> }) {
+function FilteringInput<T>({ table, columnName }: { table: TableInterface<T>, columnName: string }) {
   return (
     <Input
-      placeholder="Filtreaza dupa nume"
-      value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+      placeholder={`Filtreaza dupa ${columnName}`}
+      value={(table.getColumn(columnName)?.getFilterValue() as string) ?? ""}
       onChange={(event) =>
-        table.getColumn("name")?.setFilterValue(event.target.value)
+        table.getColumn(columnName)?.setFilterValue(event.target.value)
       }
       className="max-w-sm"
     />
